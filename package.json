@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/erikgreasy/webtech2-zadanie2/issues"
   },
-  "homepage": "https://github.com/erikgreasy/webtech2-zadanie2#readme"
+  "homepage": "https://github.com/erikgreasy/webtech2-zadanie2#readme",
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0"
+  }
 }
