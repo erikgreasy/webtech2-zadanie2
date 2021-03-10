@@ -1,23 +1,14 @@
-<?php require_once 'model/Person.php';
-    require_once 'inc/functions.php';
-require_once 'controller/PersonController.php';
-
-
-?>
-
-<?php include 'header.php' ?>
-
 <?php 
+    require_once 'inc/config.php';
+    require_once 'model/Person.php';
+    require_once 'inc/functions.php';
+    require_once 'controller/PersonController.php';
+    
+    use Pecee\SimpleRouter\SimpleRouter;
 
-    // $person = new Person( 'Erik', 'Masny', '06.07.1999', 'Zilina', 'Slovensko', '', '', '' );
+    SimpleRouter::get('/webtech/zadanie2/', 'PersonController@index');
+    
+    SimpleRouter::get('/webtech/zadanie2/persons/{id}/edit', 'PersonController@edit');
+    SimpleRouter::get('/webtech/zadanie2/persons/{id}', 'PersonController@show');
 
-    // var_dump($person);
-
-    $personController = new PersonController();
-
-
-    print_r( $personController->index() );
-?>
-
-
-<?php include 'footer.php' ?>
+    SimpleRouter::start();
