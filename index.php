@@ -9,6 +9,12 @@
     SimpleRouter::get('/webtech/zadanie2/', 'PersonController@index');
     
     SimpleRouter::get('/webtech/zadanie2/persons/{id}/edit', 'PersonController@edit');
+    SimpleRouter::post('/webtech/zadanie2/persons/{id}/edit', 'PersonController@update');
+
+    SimpleRouter::get('/webtech/zadanie2/persons/create', 'PersonController@create');
+    SimpleRouter::post('/webtech/zadanie2/persons/create', 'PersonController@store');
+
     SimpleRouter::get('/webtech/zadanie2/persons/{id}', 'PersonController@show');
+    
 
     SimpleRouter::start();
