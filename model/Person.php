@@ -12,19 +12,19 @@ class Person {
     private $death_place;
     private $death_country;
 
-    // public function __construct( $name, $surname ) {
-    //     $this->name = $name;
-    //     $this->surname = $surname;
-    //     // $this->birth_day = $birth_day;
-    //     // $this->birth_place = $birth_place;
-    //     // $this->birth_country = $birth_country;
-    //     // $this->death_day = $death_day;
-    //     // $this->death_place = $death_place;
-    //     // $this->death_country = $death_country;
-    // }
+    public function getId() {
+        return $this->id;
+    }
 
-    // public function jsonSerialize()
-    // {
-    // 	return get_object_vars($this);
-    // }
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getSurname() {
+        return $this->surname;
+    }
+
+    public function getFullName() {
+        return $this->name . ' ' . $this->surname;
+    }
 }
