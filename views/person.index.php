@@ -67,7 +67,7 @@
 
         </table>
 
-        <a href="create.php">Create new person</a>
+        <a href="<?= BASE_URL ?>/persons/create">Create new person</a>
     </div>
 </main>
 
