@@ -140,6 +140,23 @@ class PersonController {
 
 
     /**
+     * Search for person with id and deletes on success.
+     */
+    public function delete($id) {
+
+        $sql = $this->conn->prepare( 'DELETE FROM persons WHERE id = :id' );
+        $sql->execute( [
+            'id' => $id
+        ] );
+        
+        
+        $count = $sql->rowCount();
+
+        redirect(BASE_URL);
+    }
+
+
+    /**
      * Displays detail of single person.
      */
     public function show($id) {
