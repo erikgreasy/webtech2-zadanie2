@@ -1,6 +1,6 @@
 <footer id="app-footer" class="bg-dark text-light">
 
-    <div class="container text-center py-3">
+    <div class="container text-center py-4">
         &copy; 2021 Erik Masny
     </div>
 
