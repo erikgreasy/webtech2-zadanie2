@@ -27,4 +27,57 @@ class Person {
     public function getFullName() {
         return $this->name . ' ' . $this->surname;
     }
+
+    /**
+     * Get the value of birth_day
+     */ 
+    public function getBirthDay()
+    {
+        return $this->birth_day;
+    }
+
+   
+
+    
+
+    /**
+     * Get the value of birth_place
+     */ 
+    public function getBirthPlace()
+    {
+        return $this->birth_place;
+    }
+
+    /**
+     * Get the value of birth_country
+     */ 
+    public function getBirthCountry()
+    {
+        return $this->birth_country;
+    }
+
+
+     /**
+     * Get the value of death_country
+     */ 
+    public function getDeathCountry()
+    {
+        return $this->death_country;
+    }
+
+    /**
+     * Get the value of death_place
+     */ 
+    public function getDeathPlace()
+    {
+        return $this->death_place;
+    }
+
+    /**
+     * Get the value of death_day
+     */ 
+    public function getDeathDay()
+    {
+        return $this->death_day;
+    }
 }
