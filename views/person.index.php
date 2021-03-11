@@ -1,11 +1,6 @@
-<?php
 
-?>
 <?php include 'header.php' ?>
 
-<?php 
-    // dd($persons);
-?>
 <main>
     <div class="container">
         <table class="table">
@@ -53,8 +48,8 @@
                 <td>
                     <a href="<?= BASE_URL ?>/persons/<?= $person->id ?>/edit" class="btn btn-info">Edit</a>
                   
-                    <form action="delete.php" method="POST">
-                        <input type="hidden" name="person_id" value="<?= $person->id ?>">
+                    <form action="<?= BASE_URL ?>/persons/<?= $person->id ?>/delete" method="POST">
+                        <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
@@ -67,7 +62,6 @@
 
         </table>
 
-        <a href="<?= BASE_URL ?>/persons/create">Create new person</a>
     </div>
 </main>
 
