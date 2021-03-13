@@ -1,3 +1,22 @@
 main {
     padding: 50px 0;
 }
+
+#not-found {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-weight: 800;
+        font-size: 70px;
+    }
+}
+
+th {
+    button {
+        background: none;
+        border: none;
+        font-weight: bold;
+    }
+}

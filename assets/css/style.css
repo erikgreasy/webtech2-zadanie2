@@ -1,4 +1,28 @@
 main {
   padding: 50px 0;
 }
+
+#not-found {
+  height: 80vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#not-found h1 {
+  font-weight: 800;
+  font-size: 70px;
+}
+
+th button {
+  background: none;
+  border: none;
+  font-weight: bold;
+}
 /*# sourceMappingURL=style.css.map */
