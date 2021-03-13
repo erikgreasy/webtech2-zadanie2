@@ -27,8 +27,8 @@
         </div>
 
         <div class="my-5">
-            <h3>Tabuľka umiestnení</h3>
-            <table class="table">
+            <h3 class="text-center mb-4">Tabuľka umiestnení</h3>
+            <table class="table table-bordered">
                 <tr>
                     <th>Umiestnenie</th>
                     <th>Rok</th>

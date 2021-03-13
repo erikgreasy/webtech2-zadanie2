@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label for="death_day">Dátum úmrtia:</label>
-                <input type="date" name="death_day" id="death_day" class="form-control" value="<?= date('Y-m-d', strtotime($person->death_day) ) ?>">
+                <input type="date" name="death_day" id="death_day" class="form-control" value="<?= $person->death_day != '' ? date('Y-m-d', strtotime($person->death_day) ) : '' ?>">
             </div>
 
             <div class="form-group">
