@@ -211,7 +211,7 @@ class PersonController {
                 'errors'    => $errors
             ]);
         }
-        // TODO - add death values
+
         // Check if user already in DB, if so, return error
         $exists_query = "SELECT id FROM persons WHERE name = :person_name AND surname = :surname";
         $sql = $this->conn->prepare( $exists_query );
@@ -219,7 +219,6 @@ class PersonController {
             'person_name'      => $_POST['name'],
             'surname'   => $_POST['surname']
         ]);
-        
         
         if( $sql->rowCount() ) {
             $errors[] = 'Zadaný športovec už v databáze existuje';
@@ -229,8 +228,8 @@ class PersonController {
         }
 
 
-        $query = "INSERT INTO persons (name, surname, birth_day, birth_place, birth_country) 
-                VALUES (:name, :surname, :birth_day, :birth_place, :birth_country)";
+        $query = "INSERT INTO persons (name, surname, birth_day, birth_place, birth_country, death_day, death_place, death_country) 
+                VALUES (:name, :surname, :birth_day, :birth_place, :birth_country, :death_day, :death_place, :death_country)";
         $sql = $this->conn->prepare( $query );
         $result = $sql->execute( [
             'name'          => strip_tags( $_POST['name'] ),
@@ -238,6 +237,10 @@ class PersonController {
             'birth_day'     => strip_tags( $_POST['birth_day'] ),
             'birth_place'   => strip_tags( $_POST['birth_place'] ),
             'birth_country' => strip_tags( $_POST['birth_country'] ),
+            'death_day'     => strip_tags( $_POST['death_day'] ),
+            'death_place'   => strip_tags( $_POST['death_place'] ),
+            'death_country' => strip_tags( $_POST['death_country'] ),
+
         ] );
 
         redirect(BASE_URL);
