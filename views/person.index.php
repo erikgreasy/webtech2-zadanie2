@@ -3,6 +3,7 @@
 
 <main>
     <div class="container">
+        <h1>Všetci športovci</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -12,6 +13,9 @@
                             <button type="submit">Meno</button>
                         </form>
                     </th>
+
+                    <th>Umiestnenie</th>
+
                     <th>
                         <form action="">
                             <input type="hidden" name="orderby" value="year">
@@ -19,6 +23,7 @@
                         </form>
                     </th>
                     <th>Miesto konania</th>
+
                     <th>
                         <form action="">
                             <input type="hidden" name="orderby" value="<?= isset($_GET['orderby']) ? $_GET['orderby'] : '' ?>">
@@ -40,6 +45,7 @@
                         <?= $person->name ?></td>
                     </a>
                
+                <td><?= $person->placing ?></td>
                 <td><?= $person->year ?></td>
 
                 <td><?= $person->city ?></td>
@@ -62,6 +68,22 @@
 
         </table>
 
+        <h1>Rebríček najviac získaných zlatých medajlí na OH</h1>
+        <table class="table">
+            <tr>
+                <th>Meno</th>
+                <th>Počet zlatých medajlí</th>
+            </tr>
+            <?php foreach( $top_ten as $person ): ?>
+
+                <tr>
+                    <td><?= $person->name ?></td>
+                    <td><?= $person->win_count ?></td>
+
+                </tr>
+
+            <?php endforeach; ?>
+        </table>
     </div>
 </main>
 
