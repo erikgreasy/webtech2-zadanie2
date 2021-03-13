@@ -24,21 +24,33 @@ class PersonController {
         LEFT JOIN olympic_games ON olympic_games.id = standings.games_id";
 
         if( isset( $_GET['orderby'] ) && $_GET['orderby'] != '' ) {
+            
+                
             $orderby = $_GET['orderby'];
     
             switch($orderby) {
                 case 'surname':
                     $query .= ' ORDER BY persons.surname';
+                    if( isset( $_GET['ordersurname'] ) && ( $_GET['ordersurname'] == 'ASC' || $_GET['ordersurname'] == 'DESC' ) ) {
+                        $query .= ' ' . $_GET['ordersurname'];
+                    }
                     break;
                 case 'year':
-                    $query .= ' ORDER BY olympic_games.year IS NULL, olympic_games.year ASC';
+                    $query .= ' ORDER BY olympic_games.year IS NULL, olympic_games.year';
+                    if( isset( $_GET['orderyear'] ) && ( $_GET['orderyear'] == 'ASC' || $_GET['orderyear'] == 'DESC' ) ) {
+                        $query .= ' ' . $_GET['orderyear'];
+                    }
                     break;
                 default:
                     $query .= ' ORDER BY persons.id';
                     break;
             }
-    
-            if( isset( $_GET['type_order'] ) ) {
+            
+            
+
+            // dd($query);
+
+            if( isset( $_GET['type_order'] ) && $_GET['type_order'] == 'type' ) {
                 $query .= ', olympic_games.type';
             }
 

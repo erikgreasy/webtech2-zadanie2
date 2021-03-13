@@ -10,6 +10,8 @@
                     <th>
                         <form action="">
                             <input type="hidden" name="orderby" value="surname">
+                            <input type="hidden" name="ordersurname" value="<?= isset( $_GET['ordersurname'] ) && $_GET['ordersurname'] == 'ASC' ? 'DESC' : 'ASC' ?>">
+
                             <button type="submit">Meno</button>
                         </form>
                     </th>
@@ -19,6 +21,7 @@
                     <th>
                         <form action="">
                             <input type="hidden" name="orderby" value="year">
+                            <input type="hidden" name="orderyear" value="<?= isset( $_GET['orderyear'] ) && $_GET['orderyear'] == 'ASC' ? 'DESC' : 'ASC' ?>">
                             <button type="submit">Rok</button>
                         </form>
                     </th>
@@ -27,6 +30,12 @@
                     <th>
                         <form action="">
                             <input type="hidden" name="orderby" value="<?= isset($_GET['orderby']) ? $_GET['orderby'] : '' ?>">
+                          
+                            <?php if( isset( $_GET['orderby'] ) ): ?>
+                                <?php $order = 'order' . $_GET['orderby'] ?>
+                                <input type="hidden" name="order<?= $_GET['orderby'] ?>" value="<?= $_GET[$order] ?>">
+                            <?php endif; ?>
+                            
                             <input type="hidden" name="type_order" value="type">
                             <button type="submit">Typ OH</button>
                         </form>
