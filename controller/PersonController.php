@@ -68,6 +68,7 @@ class PersonController {
         ]);
         $person = $sql->fetch(PDO::FETCH_OBJ);
 
+
         return view( 'person.edit.php', [
             'person'    => $person
         ] );
@@ -79,7 +80,69 @@ class PersonController {
      * Handles person update, updates in DB
      */
     public function update($id) {
-        die('update');
+
+        $errors = [];
+
+        if( $_POST['name'] == '' ) {
+            $errors[] = 'Meno je povinná položka';
+        }
+
+        if( $_POST['surname'] == '' ) {
+            $errors[] = 'Priezvisko je povinná položka';
+        }
+
+        if( $_POST['birth_day'] == '' ) {
+            $errors[] = 'Dátum narodenia je povinná položka';
+        }
+
+        if( $_POST['birth_place'] == '' ) {
+            $errors[] = 'Miesto narodenia je povinná položka';
+        }
+
+        if( $_POST['birth_country'] == '' ) {
+            $errors[] = 'Krajina narodenia je povinná položka';
+        }
+
+        $sql = $this->conn->prepare( 'SELECT * FROM persons WHERE id = :id' );
+        $sql->execute([
+            'id'    => $id,
+        ]);
+        $person = $sql->fetch(PDO::FETCH_OBJ);
+
+        if( !empty($errors) ) {
+            return view('person.edit.php', [
+                'errors'    => $errors,
+                'person'    => $person, 
+            ]);
+        }
+
+        $insert_query = "UPDATE persons
+                         SET name = :name, 
+                             surname = :surname,
+                             birth_day = :birth_day,
+                             birth_place = :birth_place,
+                             birth_country = :birth_country,
+                             death_day = :death_day,
+                             death_place = :death_place,
+                             death_country = :death_country
+                         WHERE id = :id";
+
+        // DB INSERT
+        $sql = $this->conn->prepare( $insert_query );
+        $success = $sql->execute([
+            'name'              => $_POST['name'],
+            'surname'           => $_POST['surname'],
+            'birth_day'         => $_POST['birth_day'],
+            'birth_place'       => $_POST['birth_place'],
+            'birth_country'     => $_POST['birth_country'],
+            'death_day'         => isset($_POST['death_day']) ? $_POST['death_day'] : null,
+            'death_place'       => isset($_POST['death_place']) ? $_POST['death_place'] : null,
+            'death_country'     => isset($_POST['death_country']) ? $_POST['death_country'] : null,
+            'id'                => $id
+        ]);
+
+        // REDIRECT TO UPDATED PERSON
+        redirect( BASE_URL . '/persons/' . $id );
     }
 
 
@@ -123,7 +186,23 @@ class PersonController {
             ]);
         }
         // TODO - add death values
-        // TODO - check if not exist
+        // Check if user already in DB, if so, return error
+        $exists_query = "SELECT id FROM persons WHERE name = :person_name AND surname = :surname";
+        $sql = $this->conn->prepare( $exists_query );
+        $sql->execute([
+            'person_name'      => $_POST['name'],
+            'surname'   => $_POST['surname']
+        ]);
+        
+        
+        if( $sql->rowCount() ) {
+            $errors[] = 'Zadaný športovec už v databáze existuje';
+            return view('person.create.php', [
+                'errors'    => $errors
+            ]);
+        }
+
+
         $query = "INSERT INTO persons (name, surname, birth_day, birth_place, birth_country) 
                 VALUES (:name, :surname, :birth_day, :birth_place, :birth_country)";
         $sql = $this->conn->prepare( $query );
