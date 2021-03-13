@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Upraviť športovca:</h1>
 
-        <form action="" method="POST">
+        <form action="#" method="POST">
 
             <?php if( isset($errors) && !empty($errors) ): ?>
                 <div class="alert alert-danger" role="alert">

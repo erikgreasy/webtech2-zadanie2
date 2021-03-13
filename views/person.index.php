@@ -9,7 +9,7 @@
             <thead>
                 <tr>
                     <th>
-                        <form action="">
+                        <form action="#">
                             <input type="hidden" name="orderby" value="surname">
                             <input type="hidden" name="ordersurname" value="<?= isset( $_GET['ordersurname'] ) && $_GET['ordersurname'] == 'ASC' ? 'DESC' : 'ASC' ?>">
 
@@ -20,7 +20,7 @@
                     <th>Umiestnenie</th>
 
                     <th>
-                        <form action="">
+                        <form action="#">
                             <input type="hidden" name="orderby" value="year">
                             <input type="hidden" name="orderyear" value="<?= isset( $_GET['orderyear'] ) && $_GET['orderyear'] == 'ASC' ? 'DESC' : 'ASC' ?>">
                             <button type="submit">Rok</button>
@@ -29,7 +29,7 @@
                     <th>Miesto konania</th>
 
                     <th>
-                        <form action="">
+                        <form action="#">
                             <input type="hidden" name="orderby" value="<?= isset($_GET['orderby']) ? $_GET['orderby'] : '' ?>">
                           
                             <?php if( isset( $_GET['orderby'] ) ): ?>
