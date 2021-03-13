@@ -5,23 +5,23 @@
     <div class="container"> 
         
         <div class="jumbotron">
-            <h1 class="display-4"><?= $person->getFullName() ?></h1>
+            <h1 class="display-4"><?= filter_var( $person->getFullName(), FILTER_SANITIZE_STRING ) ?></h1>
 
             <hr>
             <div class="row mt-4">
             
                 <div class="col-lg-6">
                     <h2>Narodenie</h2>
-                    <?= $person->getBirthDay() ?>
-                    <?= $person->getBirthPlace() ?>
-                    <?= $person->getBirthCountry() ?>
+                    <?= filter_var( $person->getBirthDay(), FILTER_SANITIZE_STRING ) ?>
+                    <?= filter_var( $person->getBirthPlace(), FILTER_SANITIZE_STRING ) ?>
+                    <?= filter_var( $person->getBirthCountry(), FILTER_SANITIZE_STRING ) ?>
                     
                 </div>
                 <div class="col-lg-6">
                     <h2>Úmrtie</h2>
-                    <?= $person->getDeathDay() ?>
-                    <?= $person->getDeathPlace() ?>
-                    <?= $person->getDeathCountry() ?>
+                    <?= filter_var( $person->getDeathDay(), FILTER_SANITIZE_STRING ) ?>
+                    <?= filter_var( $person->getDeathPlace(), FILTER_SANITIZE_STRING ) ?>
+                    <?= filter_var( $person->getDeathCountry(), FILTER_SANITIZE_STRING ) ?>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                         <td><?= $standing->year ?></td>
                         <td><?= $standing->city ?></td>
                         <td><?= $standing->type ?></td>
-                        <td><?= $standing->discipline ?></td>
+                        <td><?= filter_var( $standing->discipline, FILTER_SANITIZE_STRING ) ?></td>
 
 
                     </tr>

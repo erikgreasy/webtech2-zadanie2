@@ -42,17 +42,17 @@
             <tr>
                 <td>
                     <a href="persons/<?= $person->id ?>">
-                        <?= $person->name ?></td>
+                        <?= filter_var( $person->name, FILTER_SANITIZE_STRING ) ?></td>
                     </a>
                
-                <td><?= $person->placing ?></td>
-                <td><?= $person->year ?></td>
+                <td><?= filter_var( $person->placing, FILTER_SANITIZE_STRING ) ?></td>
+                <td><?= filter_var( $person->year, FILTER_SANITIZE_STRING ) ?></td>
 
                 <td><?= $person->city ?></td>
                 <td><?= $person->type ?></td>
-                <td><?= $person->discipline ?></td>
-                <td>
-                    <a href="<?= BASE_URL ?>/persons/<?= $person->id ?>/edit" class="btn btn-info">Edit</a>
+                <td><?= filter_var( $person->discipline, FILTER_SANITIZE_STRING ) ?></td>
+                <td class="d-flex">
+                    <a href="<?= BASE_URL ?>/persons/<?= $person->id ?>/edit" class="btn btn-info mr-2">Edit</a>
                   
                     <form action="<?= BASE_URL ?>/persons/<?= $person->id ?>/delete" method="POST">
                         <input type="hidden" name="_method" value="delete">
@@ -77,7 +77,7 @@
             <?php foreach( $top_ten as $person ): ?>
 
                 <tr>
-                    <td><?= $person->name ?></td>
+                    <td><?= filter_var( $person->name, FILTER_SANITIZE_STRING ) ?></td>
                     <td><?= $person->win_count ?></td>
 
                 </tr>
