@@ -23,9 +23,11 @@
                     <a class="nav-link" href="<?= BASE_URL ?>">Všetci športovci <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= BASE_URL ?>/persons/create">Pridať nového</a>
+                    <a class="nav-link" href="<?= BASE_URL ?>/persons/create">Pridať športovca</a>
                 </li>
-            
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= BASE_URL ?>/standings/add">Pridať umiestnenie</a>
+                </li>
             </ul>
         </div>
     </nav>
