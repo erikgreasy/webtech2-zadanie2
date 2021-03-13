@@ -136,7 +136,7 @@ class PersonController {
         }
 
         // DEATH DAY
-        if( strtotime($_POST['death_day']) < strtotime($_POST['birth_day']) ) {
+        if( strtotime($_POST['death_day']) && strtotime($_POST['death_day']) < strtotime($_POST['birth_day']) ) {
             $errors[] = 'Dátum úmrtia nemôže byť skôr ako dátum narodenia';
         } else if( strtotime($_POST['death_day']) > time() ) {
             $errors[] = 'Dátum úmrtia nemôže byť v budúcnosti';
@@ -174,7 +174,7 @@ class PersonController {
             'birth_day'         => strip_tags( date('d.m.Y', strtotime($_POST['birth_day']) ) ),
             'birth_place'       => strip_tags( $_POST['birth_place'] ),
             'birth_country'     => strip_tags( $_POST['birth_country'] ),
-            'death_day'         => strip_tags( date('d.m.Y', strtotime($_POST['death_day']) ) ),
+            'death_day'         => strtotime($_POST['death_day']) ? strip_tags( date('d.m.Y', strtotime($_POST['death_day']) ) ) : null,
             'death_place'       => isset($_POST['death_place']) ? strip_tags( $_POST['death_place'] ) : null,
             'death_country'     => isset($_POST['death_country']) ? strip_tags( $_POST['death_country'] ) : null,
             'id'                => $id
@@ -232,7 +232,7 @@ class PersonController {
         }
 
         // DEATH DAY
-        if( strtotime($_POST['death_day']) < strtotime($_POST['birth_day']) ) {
+        if( strtotime($_POST['death_day']) && strtotime($_POST['death_day']) < strtotime($_POST['birth_day']) ) {
             $errors[] = 'Dátum úmrtia nemôže byť skôr ako dátum narodenia';
         } else if( strtotime($_POST['death_day']) > time() ) {
             $errors[] = 'Dátum úmrtia nemôže byť v budúcnosti';
@@ -271,12 +271,13 @@ class PersonController {
             'birth_day'     => strip_tags( date('d.m.Y', strtotime($_POST['birth_day']) ) ),
             'birth_place'   => strip_tags( $_POST['birth_place'] ),
             'birth_country' => strip_tags( $_POST['birth_country'] ),
-            'death_day'     => strip_tags( date('d.m.Y', strtotime($_POST['death_day']) ) ),
+            'death_day'     => strtotime($_POST['death_day']) ? strip_tags( date('d.m.Y', strtotime($_POST['death_day']) ) ) : null,
             'death_place'   => strip_tags( $_POST['death_place'] ),
             'death_country' => strip_tags( $_POST['death_country'] ),
 
         ] );
 
+        $GLOBALS['msg']->success('Športovec úspešne pridaný');
         redirect(BASE_URL);
     }
 
