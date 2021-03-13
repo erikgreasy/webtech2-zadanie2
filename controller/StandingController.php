@@ -82,7 +82,7 @@ class StandingController {
             'discipline'    => strip_tags( $_POST['discipline'] ),
         ]);
 
-
+        $GLOBALS['msg']->success('Záznam úspešne vytvorený');
         redirect(BASE_URL);
     }
 

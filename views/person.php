@@ -3,7 +3,7 @@
 
 <main>
     <div class="container"> 
-        
+        <?php $GLOBALS['msg']->display(); ?>
         <div class="jumbotron">
             <h1 class="display-4"><?= filter_var( $person->getFullName(), FILTER_SANITIZE_STRING ) ?></h1>
 

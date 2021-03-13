@@ -181,6 +181,7 @@ class PersonController {
         ]);
 
         // REDIRECT TO UPDATED PERSON
+        $GLOBALS['msg']->success('Športovec úspešne upravený');
         redirect( BASE_URL . '/persons/' . $id );
     }
 
@@ -292,7 +293,8 @@ class PersonController {
         
         
         $count = $sql->rowCount();
-
+        
+        $GLOBALS['msg']->success('Športovec úspešne vymazaný');
         redirect(BASE_URL);
     }
 

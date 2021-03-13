@@ -3,6 +3,7 @@
 
 <main>
     <div class="container">
+        <?php $GLOBALS['msg']->display(); ?>
         <h1>Všetci športovci</h1>
         <table class="table">
             <thead>
