@@ -32,7 +32,7 @@
 
             <div class="form-group">
                 <label for="birth_day">Dátum narodenia:</label>
-                <input type="text" name="birth_day" id="birth_day" class="form-control" value="<?= $person->birth_day ?>">
+                <input type="date" name="birth_day" id="birth_day" class="form-control" value="<?= date('Y-m-d', strtotime($person->birth_day) ) ?>">
             </div>
 
             <div class="form-group">
@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label for="death_day">Dátum úmrtia:</label>
-                <input type="text" name="death_day" id="death_day" class="form-control" value="<?= $person->death_day ?>">
+                <input type="date" name="death_day" id="death_day" class="form-control" value="<?= date('Y-m-d', strtotime($person->death_day) ) ?>">
             </div>
 
             <div class="form-group">

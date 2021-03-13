@@ -46,10 +46,6 @@ class PersonController {
                     break;
             }
             
-            
-
-            // dd($query);
-
             if( isset( $_GET['type_order'] ) && $_GET['type_order'] == 'type' ) {
                 $query .= ', olympic_games.type';
             }
@@ -107,26 +103,43 @@ class PersonController {
      */
     public function update($id) {
 
+        // VALIDATION
         $errors = [];
 
+        // NAME
         if( $_POST['name'] == '' ) {
             $errors[] = 'Meno je povinná položka';
         }
 
+        // SURNAME
         if( $_POST['surname'] == '' ) {
             $errors[] = 'Priezvisko je povinná položka';
         }
 
+        // BIRTH DAY
         if( $_POST['birth_day'] == '' ) {
             $errors[] = 'Dátum narodenia je povinná položka';
+        } else if( ! strtotime( $_POST['birth_day'] ) ) {
+            $errors[] = 'Zlý formát dátumu';
+        } else if( strtotime($_POST['birth_day']) > time() ) {
+            $errors[] = 'Dátum narodenia nemôže byť v budúcnosti';
         }
 
+        // BIRTH PLACE
         if( $_POST['birth_place'] == '' ) {
             $errors[] = 'Miesto narodenia je povinná položka';
         }
 
+        // BIRTH COUNTRY
         if( $_POST['birth_country'] == '' ) {
             $errors[] = 'Krajina narodenia je povinná položka';
+        }
+
+        // DEATH DAY
+        if( strtotime($_POST['death_day']) < strtotime($_POST['birth_day']) ) {
+            $errors[] = 'Dátum úmrtia nemôže byť skôr ako dátum narodenia';
+        } else if( strtotime($_POST['death_day']) > time() ) {
+            $errors[] = 'Dátum úmrtia nemôže byť v budúcnosti';
         }
 
         $sql = $this->conn->prepare( 'SELECT * FROM persons WHERE id = :id' );
@@ -158,10 +171,10 @@ class PersonController {
         $success = $sql->execute([
             'name'              => strip_tags( $_POST['name'] ),
             'surname'           => strip_tags( $_POST['surname'] ),
-            'birth_day'         => strip_tags( $_POST['birth_day'] ),
+            'birth_day'         => strip_tags( date('d.m.Y', strtotime($_POST['birth_day']) ) ),
             'birth_place'       => strip_tags( $_POST['birth_place'] ),
             'birth_country'     => strip_tags( $_POST['birth_country'] ),
-            'death_day'         => isset($_POST['death_day']) ? strip_tags( $_POST['death_day'] ) : null,
+            'death_day'         => strip_tags( date('d.m.Y', strtotime($_POST['death_day']) ) ),
             'death_place'       => isset($_POST['death_place']) ? strip_tags( $_POST['death_place'] ) : null,
             'death_country'     => isset($_POST['death_country']) ? strip_tags( $_POST['death_country'] ) : null,
             'id'                => $id
@@ -184,28 +197,47 @@ class PersonController {
      * Handles post on create form. Stores into db on success.
      */
     public function store() {
+
+        // VALIDATION
         $errors = [];
 
+        // NAME
         if( $_POST['name'] == '' ) {
             $errors[] = 'Meno je povinná položka';
         }
 
+        // SURNAME
         if( $_POST['surname'] == '' ) {
             $errors[] = 'Priezvisko je povinná položka';
         }
 
+        // BIRTH DAY
         if( $_POST['birth_day'] == '' ) {
             $errors[] = 'Dátum narodenia je povinná položka';
+        } else if( ! strtotime( $_POST['birth_day'] ) ) {
+            $errors[] = 'Zlý formát dátumu';
+        } else if( strtotime($_POST['birth_day']) > time() ) {
+            $errors[] = 'Dátum narodenia nemôže byť v budúcnosti';
         }
 
+        // BIRTH PLACE
         if( $_POST['birth_place'] == '' ) {
             $errors[] = 'Miesto narodenia je povinná položka';
         }
 
+        // BIRTH COUNTRY
         if( $_POST['birth_country'] == '' ) {
             $errors[] = 'Krajina narodenia je povinná položka';
         }
 
+        // DEATH DAY
+        if( strtotime($_POST['death_day']) < strtotime($_POST['birth_day']) ) {
+            $errors[] = 'Dátum úmrtia nemôže byť skôr ako dátum narodenia';
+        } else if( strtotime($_POST['death_day']) > time() ) {
+            $errors[] = 'Dátum úmrtia nemôže byť v budúcnosti';
+        }
+
+        // VALIDATION NOT SUCCESSFUL
         if( !empty($errors) ) {
             return view('person.create.php', [
                 'errors'    => $errors
@@ -228,16 +260,17 @@ class PersonController {
         }
 
 
+        // EVERYTHING'S GOOD, LET's PUT THAT SON OF A SNITCH TO DB
         $query = "INSERT INTO persons (name, surname, birth_day, birth_place, birth_country, death_day, death_place, death_country) 
                 VALUES (:name, :surname, :birth_day, :birth_place, :birth_country, :death_day, :death_place, :death_country)";
         $sql = $this->conn->prepare( $query );
         $result = $sql->execute( [
             'name'          => strip_tags( $_POST['name'] ),
             'surname'       => strip_tags( $_POST['surname'] ),
-            'birth_day'     => strip_tags( $_POST['birth_day'] ),
+            'birth_day'     => strip_tags( date('d.m.Y', strtotime($_POST['birth_day']) ) ),
             'birth_place'   => strip_tags( $_POST['birth_place'] ),
             'birth_country' => strip_tags( $_POST['birth_country'] ),
-            'death_day'     => strip_tags( $_POST['death_day'] ),
+            'death_day'     => strip_tags( date('d.m.Y', strtotime($_POST['death_day']) ) ),
             'death_place'   => strip_tags( $_POST['death_place'] ),
             'death_country' => strip_tags( $_POST['death_country'] ),
 
@@ -268,12 +301,15 @@ class PersonController {
      * Displays detail of single person.
      */
     public function show($id) {
+
+        // GET PERSON
         $sth = $this->conn->prepare("SELECT * FROM persons WHERE id = :id");
         $sth->execute( [
             'id'    => $id
         ] );
         $person = $sth->fetchAll(PDO::FETCH_CLASS, "Person")[0];
 
+        // GET HIS STANDINGS
         $sql = $this->conn->prepare( "SELECT standings.placing, standings.discipline, og.year, og.city, og.type FROM standings
                                       LEFT JOIN olympic_games as og ON og.id = standings.games_id
                                       WHERE person_id = :person_id" );

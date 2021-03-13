@@ -32,7 +32,7 @@
 
             <div class="form-group">
                 <label for="birth_day">Dátum narodenia:</label>
-                <input type="text" name="birth_day" id="birth_day" class="form-control" value="<?= isset($_POST['birth_day']) ? $_POST['birth_day'] : '' ?>">
+                <input type="date" name="birth_day" id="birth_day" class="form-control" value="<?= isset($_POST['birth_day']) ? $_POST['birth_day'] : '' ?>">
             </div>
 
             <div class="form-group">
@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label for="death_day">Dátum úmrtia:</label>
-                <input type="text" name="death_day" id="death_day" class="form-control" value="<?= isset($_POST['death_day']) ? $_POST['death_day'] : '' ?>">
+                <input type="date" name="death_day" id="death_day" class="form-control" value="<?= isset($_POST['death_day']) ? $_POST['death_day'] : '' ?>">
             </div>
 
             <div class="form-group">
