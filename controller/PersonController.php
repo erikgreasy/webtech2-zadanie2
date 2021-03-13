@@ -1,6 +1,7 @@
 <?php
 
 require_once 'model/Person.php';
+require_once 'model/Standing.php';
 require_once 'inc/Database.php';
 
 class PersonController {
@@ -17,7 +18,7 @@ class PersonController {
      * Displays all persons with their olympic standings
      */
     public function index() {
-        $query = "SELECT persons.id, CONCAT(persons.name, ' ',persons.surname) as name, olympic_games.year, olympic_games.city, olympic_games.type, standings.discipline 
+        $query = "SELECT persons.id, CONCAT(persons.surname, ' ',persons.name) as name, olympic_games.year, olympic_games.city, olympic_games.type, standings.placing, standings.discipline 
         FROM persons 
         LEFT JOIN standings ON persons.id = standings.person_id
         LEFT JOIN olympic_games ON olympic_games.id = standings.games_id";
@@ -52,8 +53,21 @@ class PersonController {
         $sql->setFetchMode(PDO::FETCH_OBJ);
         $persons = $sql->fetchAll();
 
+        $query = "SELECT persons.id, CONCAT(persons.surname, ' ',persons.name) as name, COUNT(persons.id) as win_count
+        FROM persons 
+        LEFT JOIN standings ON persons.id = standings.person_id
+        LEFT JOIN olympic_games ON olympic_games.id = standings.games_id
+        WHERE standings.placing = 1
+        GROUP BY persons.id
+        ORDER BY win_count DESC, name ASC
+        LIMIT 10";
+        $sql = $this->conn->query( $query );
+        $sql->setFetchMode(PDO::FETCH_OBJ);
+        $top_ten = $sql->fetchAll();
+
         return view( 'person.index.php', [
-            'persons'   => $persons
+            'persons'   => $persons,
+            'top_ten'   => $top_ten,
         ] );
     }
 
@@ -245,8 +259,17 @@ class PersonController {
         ] );
         $person = $sth->fetchAll(PDO::FETCH_CLASS, "Person")[0];
 
+        $sql = $this->conn->prepare( "SELECT standings.placing, standings.discipline, og.year, og.city, og.type FROM standings
+                                      LEFT JOIN olympic_games as og ON og.id = standings.games_id
+                                      WHERE person_id = :person_id" );
+        $sql->execute([
+            'person_id' => $id
+        ]);
+        $standings = $sql->fetchAll( PDO::FETCH_OBJ );
+
         return view( 'person.php', [
             'person'    => $person,
+            'standings' => $standings,
         ] );
     }
 }
