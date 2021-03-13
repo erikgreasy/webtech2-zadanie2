@@ -25,7 +25,7 @@ class Person {
     }
 
     public function getFullName() {
-        return $this->name . ' ' . $this->surname;
+        return $this->surname . ' ' . $this->name;
     }
 
     /**
