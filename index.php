@@ -8,21 +8,21 @@
     use Pecee\SimpleRouter\SimpleRouter;
 
     // PERSONS
-    SimpleRouter::get('/webtech/zadanie2/', 'PersonController@index');
-    SimpleRouter::get('/webtech/zadanie2/persons/{id}/edit', 'PersonController@edit');
-    SimpleRouter::post('/webtech/zadanie2/persons/{id}/edit', 'PersonController@update');
-    SimpleRouter::delete('/webtech/zadanie2/persons/{id}/delete', 'PersonController@delete');
-    SimpleRouter::get('/webtech/zadanie2/persons/create', 'PersonController@create');
-    SimpleRouter::post('/webtech/zadanie2/persons/create', 'PersonController@store');
-    SimpleRouter::get('/webtech/zadanie2/persons/{id}', 'PersonController@show');
+    SimpleRouter::get( ROUTING_PREFIX . '/' , 'PersonController@index');
+    SimpleRouter::get( ROUTING_PREFIX .'/persons/{id}/edit', 'PersonController@edit');
+    SimpleRouter::post( ROUTING_PREFIX .'/persons/{id}/edit', 'PersonController@update');
+    SimpleRouter::delete( ROUTING_PREFIX .'/persons/{id}/delete', 'PersonController@delete');
+    SimpleRouter::get( ROUTING_PREFIX .'/persons/create', 'PersonController@create');
+    SimpleRouter::post( ROUTING_PREFIX .'/persons/create', 'PersonController@store');
+    SimpleRouter::get( ROUTING_PREFIX .'/persons/{id}', 'PersonController@show');
 
 
 
     
 
     // STANDINGS
-    SimpleRouter::get('/webtech/zadanie2/standings/add', 'StandingController@create');
-    SimpleRouter::post('/webtech/zadanie2/standings/add', 'StandingController@store');
+    SimpleRouter::get( ROUTING_PREFIX .'/standings/add', 'StandingController@create');
+    SimpleRouter::post( ROUTING_PREFIX .'/standings/add', 'StandingController@store');
 
 
 
