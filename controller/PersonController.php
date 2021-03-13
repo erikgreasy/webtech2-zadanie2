@@ -31,7 +31,7 @@ class PersonController {
                     $query .= ' ORDER BY persons.surname';
                     break;
                 case 'year':
-                    $query .= ' ORDER BY olympic_games.year';
+                    $query .= ' ORDER BY olympic_games.year IS NULL, olympic_games.year ASC';
                     break;
                 default:
                     $query .= ' ORDER BY persons.id';
@@ -44,7 +44,7 @@ class PersonController {
 
         } else {
             if( isset( $_GET['type_order'] ) ) {
-                $query .= ' ORDER BY olympic_games.type';
+                $query .= ' ORDER BY olympic_games.type IS NULL, olympic_games.type ASC';
             }
         }
     
@@ -144,14 +144,14 @@ class PersonController {
         // DB INSERT
         $sql = $this->conn->prepare( $insert_query );
         $success = $sql->execute([
-            'name'              => $_POST['name'],
-            'surname'           => $_POST['surname'],
-            'birth_day'         => $_POST['birth_day'],
-            'birth_place'       => $_POST['birth_place'],
-            'birth_country'     => $_POST['birth_country'],
-            'death_day'         => isset($_POST['death_day']) ? $_POST['death_day'] : null,
-            'death_place'       => isset($_POST['death_place']) ? $_POST['death_place'] : null,
-            'death_country'     => isset($_POST['death_country']) ? $_POST['death_country'] : null,
+            'name'              => strip_tags( $_POST['name'] ),
+            'surname'           => strip_tags( $_POST['surname'] ),
+            'birth_day'         => strip_tags( $_POST['birth_day'] ),
+            'birth_place'       => strip_tags( $_POST['birth_place'] ),
+            'birth_country'     => strip_tags( $_POST['birth_country'] ),
+            'death_day'         => isset($_POST['death_day']) ? strip_tags( $_POST['death_day'] ) : null,
+            'death_place'       => isset($_POST['death_place']) ? strip_tags( $_POST['death_place'] ) : null,
+            'death_country'     => isset($_POST['death_country']) ? strip_tags( $_POST['death_country'] ) : null,
             'id'                => $id
         ]);
 
@@ -221,11 +221,11 @@ class PersonController {
                 VALUES (:name, :surname, :birth_day, :birth_place, :birth_country)";
         $sql = $this->conn->prepare( $query );
         $result = $sql->execute( [
-            'name'  => $_POST['name'],
-            'surname'   => $_POST['surname'],
-            'birth_day' => $_POST['birth_day'],
-            'birth_place'   => $_POST['birth_place'],
-            'birth_country' => $_POST['birth_country']
+            'name'          => strip_tags( $_POST['name'] ),
+            'surname'       => strip_tags( $_POST['surname'] ),
+            'birth_day'     => strip_tags( $_POST['birth_day'] ),
+            'birth_place'   => strip_tags( $_POST['birth_place'] ),
+            'birth_country' => strip_tags( $_POST['birth_country'] ),
         ] );
 
         redirect(BASE_URL);

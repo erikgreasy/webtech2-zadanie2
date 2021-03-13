@@ -24,7 +24,7 @@ class StandingController {
         $olympic_games = $sql->fetchAll( PDO::FETCH_OBJ );
 
         return view('standing.create.php', [
-            'persons'   => $persons,
+            'persons'       => $persons,
             'olympic_games' => $olympic_games,
         ]);
     }
@@ -76,10 +76,10 @@ class StandingController {
         $sql = $this->conn->prepare( "INSERT INTO standings(person_id, games_id, placing, discipline)
                                       VALUES( :person_id, :games_id, :placing, :discipline )" );
         $success = $sql->execute([
-            'person_id'     => $_POST['person'],
-            'games_id'      => $_POST['olympic_games'],
-            'placing'       => $_POST['standing'],
-            'discipline'    => $_POST['discipline']
+            'person_id'     => strip_tags( $_POST['person'] ),
+            'games_id'      => strip_tags( $_POST['olympic_games'] ),
+            'placing'       => strip_tags( $_POST['standing'] ),
+            'discipline'    => strip_tags( $_POST['discipline'] ),
         ]);
 
 
