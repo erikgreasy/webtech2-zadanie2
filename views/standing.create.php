@@ -3,9 +3,9 @@
 
 
 
-<main>
+<main class="standing-create">
     <div class="container">
-        <h1>Pridanie nového umiestnenia:</h1>
+        <h1 class="text-center mb-4">Pridajte nové umiestnenie:</h1>
         <form action="#" method="POST">
 
             <?php if( isset($errors) && !empty($errors) ): ?>

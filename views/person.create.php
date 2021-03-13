@@ -3,9 +3,9 @@
 
 
 
-<main>
+<main class="person-create">
     <div class="container">
-        <h1>Pridajte nového športovca:</h1>
+        <h1 class="text-center mb-4">Pridajte nového športovca:</h1>
         <form action="#" method="POST">
 
             <?php if( isset($errors) && !empty($errors) ): ?>

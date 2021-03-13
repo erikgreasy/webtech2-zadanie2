@@ -5,10 +5,10 @@
     <div class="container"> 
         <?php $GLOBALS['msg']->display(); ?>
         <div class="jumbotron">
-            <h1 class="display-4"><?= filter_var( $person->getFullName(), FILTER_SANITIZE_STRING ) ?></h1>
+            <h1 class="display-4 text-center"><?= filter_var( $person->getFullName(), FILTER_SANITIZE_STRING ) ?></h1>
 
             <hr>
-            <div class="row mt-4">
+            <div class="row mt-4 text-center">
             
                 <div class="col-lg-6">
                     <h2>Narodenie</h2>

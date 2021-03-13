@@ -1,7 +1,7 @@
 
 <?php include 'header.php' ?>
 
-<main>
+<main class="person-index">
     <div class="container">
         <?php $GLOBALS['msg']->display(); ?>
         <section>

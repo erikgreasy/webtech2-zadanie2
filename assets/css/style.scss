@@ -1,3 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 main {
     padding: 50px 0;
 }
@@ -14,9 +21,22 @@ main {
 }
 
 th {
+
+    background: #dddddd;
+
     button {
         background: none;
         border: none;
         font-weight: bold;
+    }
+}
+
+tr {
+    a {
+        color: #000;
+        font-weight: 600;
+    }
+    &:hover {
+        background: #f3f3f3;
     }
 }

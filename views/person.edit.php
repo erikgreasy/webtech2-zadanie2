@@ -1,8 +1,8 @@
 <?php include 'header.php' ?>
 
-<main>
+<main class="person-edit">
     <div class="container">
-        <h1>Upraviť športovca:</h1>
+        <h1 class="mb-4 text-center">Upravte športovca:</h1>
 
         <form action="#" method="POST">
 
