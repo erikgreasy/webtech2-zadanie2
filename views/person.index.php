@@ -53,9 +53,9 @@
                 <tr>
                     <td>
                         <a href="persons/<?= $person->id ?>">
-                            <?= filter_var( $person->name, FILTER_SANITIZE_STRING ) ?></td>
+                            <?= filter_var( $person->name, FILTER_SANITIZE_STRING ) ?>
                         </a>
-                
+                    </td>
                     <td><?= filter_var( $person->placing, FILTER_SANITIZE_STRING ) ?></td>
                     <td><?= filter_var( $person->year, FILTER_SANITIZE_STRING ) ?></td>
 
